@@ -1,0 +1,7 @@
+name: TavernCuisineBP
+version: 1.0
+main: me.boyakabrodyaka.cuisine.Cuisine
+api-version: 1.12
+description: Система готовки и рецептов
+author: BoyakaBrodyaka
+depend: [TavernCoreBP]

@@ -1,0 +1,11 @@
+name: TavernCoreBP
+version: 1.0
+main: me.boyakabrodyaka.core.Core
+api-version: 1.12
+description: Ядро проекта Tavern
+author: BoyakaBrodyaka
+
+commands:
+  world:
+    description: Телепортация между мирами
+    aliases: [w]

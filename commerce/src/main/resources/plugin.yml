@@ -1,0 +1,23 @@
+name: TavernCommerceBP
+version: 1.0
+main: me.boyakabrodyaka.commerce.Commerce
+api-version: 1.12
+description: Экономическая система и торговля Tavern
+author: BoyakaBrodyaka
+depend: [TavernCoreBP, TavernCuisineBP]
+
+commands:
+  money:
+    description: Управление деньгами
+    aliases: [bal, balance, m]
+  day:
+    description: Start a day
+    usage: /day
+  skipday:
+    description: Skip the current day
+    usage: /skipday
+
+permissions:
+  tavern.money.set:
+    description: Установка баланса
+    default: op

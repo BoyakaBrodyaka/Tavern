@@ -1,0 +1,12 @@
+name: TavernProgressionBP
+version: 1.0
+main: me.boyakabrodyaka.progression.Progression
+api-version: 1.12
+description: Прогрессия - престиж, достижения, лидеры
+author: BoyakaBrodyaka
+depend: [TavernCoreBP, TavernCuisineBP, TavernCommerceBP, TavernOperationsBP]
+
+commands:
+  upgrade:
+    description: Open upgrade menu
+    usage: /upgrade

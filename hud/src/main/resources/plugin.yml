@@ -1,0 +1,12 @@
+name: TavernHUDBP
+version: 1.0
+main: me.boyakabrodyaka.hud.HUD
+api-version: 1.12
+description: Система скорборда, таблиц, боссбаров и т.д
+author: BoyakaBrodyaka
+depend: [TavernCoreBP, TavernCommerceBP]
+
+commands:
+  menu:
+    description: Open game menu
+    usage: /menu

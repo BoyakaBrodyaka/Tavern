@@ -1,0 +1,84 @@
+plugins {
+    id 'java'
+    id 'java-library'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+allprojects {
+    group = 'me.boyakabrodyaka'
+    version = '1.0.0'
+
+    repositories {
+        mavenCentral()
+        flatDir {
+            dirs 'libs'
+        }
+        maven {
+            url = 'https://repo.mongodb.org/maven/'
+        }
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'java-library'
+    apply plugin: 'com.github.johnrengelman.shadow'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    dependencies {
+        compileOnly files(rootProject.file('spigot-1.12.2.jar'))
+        compileOnly files(rootProject.file('TavernMod.jar'))
+        annotationProcessor ("org.projectlombok:lombok:1.18.34")
+        compileOnly ("org.projectlombok:lombok:1.18.34")
+        compileOnly fileTree(dir: 'libs', include: ['*.jar'])
+        implementation fileTree(dir: 'libs', include: ['*.jar'])
+        annotationProcessor fileTree(dir: 'libs', include: ['lombok-*.jar'])
+
+        implementation 'org.mongodb:mongodb-driver-sync:3.12.14'
+        implementation 'org.mongodb:bson:3.12.14'
+        implementation 'org.mongodb:mongodb-driver-core:3.12.14'
+        implementation 'org.slf4j:slf4j-api:1.7.36'
+
+        testImplementation platform('org.junit:junit-bom:5.10.0')
+        testImplementation 'org.junit.jupiter:junit-jupiter'
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
+    }
+
+    shadowJar {
+        archiveBaseName.set("Tavern-${project.name.capitalize()}BP")
+        archiveVersion.set(project.version.toString())
+        archiveClassifier.set('')
+
+        mergeServiceFiles()
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}
+
+task collectJars(type: Copy) {
+    dependsOn subprojects.tasks.shadowJar
+
+    from subprojects.collect { it.tasks.shadowJar }
+
+    into "${buildDir}/libs"
+
+    rename { fileName ->
+        fileName.replace('-all', '')
+    }
+}
+
+task buildAll {
+    dependsOn collectJars
+    description = 'Собирает все модули и складывает JAR\'ы в build/libs/'
+}
+
+build {
+    dependsOn collectJars
+}

@@ -1,0 +1,6 @@
+dependencies {
+    implementation project(':core')
+    implementation project(':cuisine')
+    implementation project(':commerce')
+    implementation project(':operations')
+}

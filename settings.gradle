@@ -1,0 +1,8 @@
+rootProject.name = 'Tavern'
+
+include 'core'
+include 'cuisine'
+include 'commerce'
+include 'operations'
+include 'progression'
+include 'hud'
